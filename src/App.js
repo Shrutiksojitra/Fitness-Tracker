@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Use Routes instead of Switch
+import { AuthProvider } from './context/AuthContext';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
+// import Dashboard from './components/Dashboard';
+import Navbar from './components/Navbar'; 
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <AuthProvider>
+            <Router>
+                <Navbar /> 
+                <Routes> {/* Use Routes here */}
+                    <Route path="/" element={<Login />} /> {/* Use element instead of component */}
+                    <Route path="/signup" element={<Signup />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;
